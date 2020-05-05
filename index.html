@@ -1,8 +1,24 @@
-
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Address Pickers</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<h1>Address Pickers for Google form</h1>
+	<div class="container">
+		<h1>Method 1</h1>
+<ul>
+<li>Submit button generates a form URL containing address details</li>
+<li>eg https://docs.google.com/forms/d/e/1FAIpQLSfsYR1s8N7xGjMA3e80Tk9fi1BwCWpI7U__iGY4f7CWmo_hCA/viewform?entry.467818239=ADDRESS LINE 1&entry.998780630=POSTCODE</li>
+<li>is this a security problem?</li>
+<li>this solution only works for traffic directed through this page!</li>
+<li>Currently this doesnt gurantee that user will enter a house or flat number </li>
+</ul>
 <form action="https://docs.google.com/forms/d/e/1FAIpQLSfsYR1s8N7xGjMA3e80Tk9fi1BwCWpI7U__iGY4f7CWmo_hCA/viewform" class="form">
   <div class="form-group">
     <label for="form-address">Address*</label>
-    <input type="search" class="form-control" id="form-address" name="entry.467818239" placeholder="Where do you live?" required />
+    <input type="search" class="form-control" id="form-address" name="entry.467818239" placeholder="Type address or postcode" required />
   </div>
   <div class="form-group">
     <label for="form-address2">Address 2</label>
@@ -29,6 +45,8 @@
     container: document.querySelector('#form-address'),
     templates: {
       value: function(suggestion) {
+      	  // console.log(suggestion)
+
         return suggestion.name;
       }
     }
@@ -43,3 +61,21 @@
   });
 })();
 </script>
+
+     
+	</div>
+
+<br/><br/>
+
+	<div class="container">
+		<h1>Method 2</h1>
+		<ul>
+<li>Prepopulates the address field in the form similar to method 1 EXCEPT that</li>
+<li>Submit button sends address in POST request (More secure than URL parameters)</li>
+<li>Google forms thinks you have tried to submit so you get these warnings (bad UX!):</li>
+
+</ul>
+		<img src="google-form-error.png" alt="">
+	</div>
+</body>
+</html>
