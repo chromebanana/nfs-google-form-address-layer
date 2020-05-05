@@ -1,0 +1,49 @@
+<form action="https://docs.google.com/forms/d/e/1FAIpQLSfsYR1s8N7xGjMA3e80Tk9fi1BwCWpI7U__iGY4f7CWmo_hCA/formResponse" method="POST">
+
+	 <div class="form-group">
+    <label for="form-address">Email</label>
+    <input type="email" class="form-control" id="form-email" name="emailAddress" placeholder="name@ad" />
+  </div>
+  <div class="form-group">
+    <label for="form-address">Address*</label>
+    <input type="search" class="form-control" id="form-address" name="entry.467818239" placeholder="Where do you live?" />
+  </div>
+  <div class="form-group">
+    <label for="form-address2">Address 2</label>
+    <input type="text" class="form-control" id="form-address2" placeholder="Street number and name" />
+  </div>
+  <div class="form-group">
+    <label for="form-city">City*</label>
+    <input type="text" class="form-control" id="form-city" placeholder="City">
+  </div>
+  <div class="form-group">
+    <label for="form-zip">Postcode*</label>
+    <input type="text" class="form-control" id="form-zip" name="entry.998780630" placeholder="ZIP code">
+  </div>
+  	<input type="submit" value="Submit">
+
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/places.js@1.18.2"></script>
+<script>
+(function() {
+  var placesAutocomplete = places({
+    appId: 'pl6AKCYO5IOQ',
+    apiKey: '0f9dece6e2bbbfd730075ed151551b20',
+    container: document.querySelector('#form-address'),
+    templates: {
+      value: function(suggestion) {
+        return suggestion.name;
+      }
+    }
+  }).configure({
+    type: 'address',
+    countries: ['gb']
+  });
+  placesAutocomplete.on('change', function resultSelected(e) {
+    document.querySelector('#form-address2').value = e.suggestion.administrative || '';
+    document.querySelector('#form-city').value = e.suggestion.city || '';
+    document.querySelector('#form-zip').value = e.suggestion.postcode || '';
+  });
+})();
+</script>
